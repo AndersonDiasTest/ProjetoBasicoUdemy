@@ -32,7 +32,6 @@ public class BasePage {
 		//combo.selectByValue("superior"); (necessário refatorar metodo)
 		//combo.selectByIndex(7); (necessário refatorar metodo)
 		//combo.deselectByVisibleText("O que eh esporte?");
-		
 	}
 	
 	public void clicaBotao(String botao) {
@@ -44,6 +43,10 @@ public class BasePage {
 		getDriver().findElement(By.linkText(link)).click();	
 	}
 
+	public String recuperaUrlAtual() {
+		return getDriver().getCurrentUrl();
+	}
+	
 	/****************** busca valores ***********************/
 	
 	public String recuperaValorCampo(String campo) {
@@ -116,6 +119,23 @@ public class BasePage {
 		celula.findElement(By.xpath(".//input")).click();
 		
 	}
+	
+	public String recuperaTextoTabela(String colunaBusca, String valor, String colunaBotao) {
+		//procurar a coluna do registro
+		WebElement tabela = getDriver().findElement(By.xpath("//table[@id='tabelaContas']"));
+		int idColuna = obterIdColuna(colunaBusca, tabela);
+		
+		//procurar a linha do registro
+		int idLinha = obterIdLinha(valor, tabela, idColuna);
+		
+		//procurar a coluna do botão
+		int idColunaBotao = obterIdColuna(colunaBotao, tabela);
+		
+		//clicar no botão
+		WebElement celula = tabela.findElement(By.xpath(".//tr["+idLinha+"]/td["+idColunaBotao+"]"));
+		return celula.getText();
+		
+	}
 
 	public int obterIdLinha(String valor, WebElement tabela, int idColuna) {
 		List<WebElement> linhas = tabela.findElements(By.xpath("./tbody/tr/td["+idColuna+"]"));
@@ -143,5 +163,5 @@ public class BasePage {
 		}
 		return idColuna;
 	}
-
+	
 }
