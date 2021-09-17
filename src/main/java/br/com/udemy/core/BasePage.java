@@ -47,6 +47,10 @@ public class BasePage {
 		return getDriver().getCurrentUrl();
 	}
 	
+	public void limparCampo(String campo) {
+		getDriver().findElement(By.id(campo)).clear();
+	}
+	
 	/****************** busca valores ***********************/
 	
 	public String recuperaValorCampo(String campo) {
@@ -105,7 +109,7 @@ public class BasePage {
 	
 	public void clicaBotaoTabela(String colunaBusca, String valor, String colunaBotao) {
 		//procurar a coluna do registro
-		WebElement tabela = getDriver().findElement(By.xpath("//table[@id='elementosForm:tableUsuarios']"));
+		WebElement tabela = getDriver().findElement(By.xpath("//table[@id='tabelaContas']"));
 		int idColuna = obterIdColuna(colunaBusca, tabela);
 		
 		//procurar a linha do registro
@@ -116,8 +120,7 @@ public class BasePage {
 		
 		//clicar no botão
 		WebElement celula = tabela.findElement(By.xpath(".//tr["+idLinha+"]/td["+idColunaBotao+"]"));
-		celula.findElement(By.xpath(".//input")).click();
-		
+		celula.findElement(By.xpath(".//a[1]")).click();
 	}
 	
 	public String recuperaTextoTabela(String colunaBusca, String valor, String colunaBotao) {

@@ -11,6 +11,11 @@ public class HomePage extends BasePage {
 		clicaLink("Adicionar");
 	}
 	
+	public void clicaMenuListarContas() {
+		clicaLink("Contas");
+		clicaLink("Listar");
+	}
+	
 	public String obterTextoSucessoLogin() {
 		return obterTexto(By.xpath("//body/div[@role='alert']"));
 	}
