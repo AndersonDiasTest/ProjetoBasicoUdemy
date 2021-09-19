@@ -1,7 +1,5 @@
 package br.com.udemy.test;
 
-import static br.com.udemy.core.DriverFactory.getDriver;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,17 +11,13 @@ import br.com.udemy.page.LoginPage;
 
 public class ContasTest extends BaseTest{
 
-	private LoginPage loginPage;
-	private HomePage homePage;
-	private ContasPage contaPage;
+	private LoginPage loginPage = new LoginPage();
+	private HomePage homePage = new HomePage();
+	private ContasPage contaPage = new ContasPage();
 
 	@Before
 	public void inicializa () {
-		getDriver().get("https://seubarriga.wcaquino.me");
 //		getDriver().manage().window().maximize();
-		loginPage = new LoginPage();
-		homePage = new HomePage();
-		contaPage = new ContasPage();
 		loginPage.logar("udemy@mail", "pass");
 	}
 	
@@ -35,19 +29,18 @@ public class ContasTest extends BaseTest{
 		
 		Assert.assertEquals("Primeira Conta", contaPage.recuperaTextoTabela("Conta", "Primeira Conta", "Conta"));
 		Assert.assertEquals("https://seubarriga.wcaquino.me/salvarConta", contaPage.recuperaUrlAtual());
-		Assert.assertEquals("Conta adicionada com sucesso!", contaPage.obterTextoAlertaCadastroContaSucesso());
+		Assert.assertEquals("Conta adicionada com sucesso!", contaPage.obterTextoMsgAlertas());
 	}
 	
 	@Test
 	public void alterarContaComSucesso() {
 		homePage.clicaMenuListarContas();
-		contaPage.clicaBotaoTabela("Conta", "Primeira Conta", "Ações");
-		contaPage.limparCampo("nome");
+		contaPage.clicaBotaoAlterarConta("Primeira Conta");
 		contaPage.setNomeConta("Primeira Conta alterada");
 		contaPage.submit();
 		
 		Assert.assertEquals("https://seubarriga.wcaquino.me/salvarConta", contaPage.recuperaUrlAtual());
-		Assert.assertEquals("Conta alterada com sucesso!", contaPage.obterTextoAlertaCadastroContaSucesso());
+		Assert.assertEquals("Conta alterada com sucesso!", contaPage.obterTextoMsgAlertas());
 		Assert.assertEquals("Primeira Conta alterada", contaPage.recuperaTextoTabela("Conta", "Primeira Conta alterada", "Conta"));
 	}
 	
@@ -57,7 +50,22 @@ public class ContasTest extends BaseTest{
 		contaPage.setNomeConta("Primeira Conta alterada");
 		contaPage.submit();
 		
-		Assert.assertEquals("Já existe uma conta com esse nome!", contaPage.obterTextoAlertaCadastroContaSucesso());
+		Assert.assertEquals("Já existe uma conta com esse nome!", 
+				contaPage.obterTextoMsgAlertas());
+	}
+	
+	@Test
+	public void removerContaEmUso() {
+		homePage.clicaMenuListarContas();
+		contaPage.clicaBotaoRemoverConta("Primeira Conta alterada");
+		Assert.assertEquals("Conta em uso na movimentações", 
+				contaPage.obterTextoMsgAlertas());
+	}
+	
+	@Test
+	public void validarSaldoContas() {
+		Assert.assertEquals("2.00", 
+				contaPage.recuperaTextoTabelaSaldo("Conta", "Primeira Conta alterada", "Saldo"));
 	}
 	
 }

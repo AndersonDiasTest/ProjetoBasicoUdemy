@@ -14,6 +14,7 @@ public class BasePage {
 /****************** ações no formulário *********************/
 	
 	public void preenche(String campo, String texto) {
+		getDriver().findElement(By.id(campo)).clear();
 		getDriver().findElement(By.id(campo)).sendKeys(texto);
 	}
 
@@ -45,10 +46,6 @@ public class BasePage {
 
 	public String recuperaUrlAtual() {
 		return getDriver().getCurrentUrl();
-	}
-	
-	public void limparCampo(String campo) {
-		getDriver().findElement(By.id(campo)).clear();
 	}
 	
 	/****************** busca valores ***********************/
@@ -105,11 +102,14 @@ public class BasePage {
 		return alerta.getText();
 	}
 	
+	//tem funcionado para todos os alertas
+
+	
 	/****************** ações na tabela *********************/
 	
-	public void clicaBotaoTabela(String colunaBusca, String valor, String colunaBotao) {
+	public WebElement obterCelula(String colunaBusca, String valor, String colunaBotao, String idTabela) {
 		//procurar a coluna do registro
-		WebElement tabela = getDriver().findElement(By.xpath("//table[@id='tabelaContas']"));
+		WebElement tabela = getDriver().findElement(By.xpath("//table[@id='" + idTabela + "']"));
 		int idColuna = obterIdColuna(colunaBusca, tabela);
 		
 		//procurar a linha do registro
@@ -118,9 +118,9 @@ public class BasePage {
 		//procurar a coluna do botão
 		int idColunaBotao = obterIdColuna(colunaBotao, tabela);
 		
-		//clicar no botão
+		//retornar celula
 		WebElement celula = tabela.findElement(By.xpath(".//tr["+idLinha+"]/td["+idColunaBotao+"]"));
-		celula.findElement(By.xpath(".//a[1]")).click();
+		return celula;
 	}
 	
 	public String recuperaTextoTabela(String colunaBusca, String valor, String colunaBotao) {
@@ -139,8 +139,25 @@ public class BasePage {
 		return celula.getText();
 		
 	}
+	
+	public String recuperaTextoTabelaSaldo(String colunaBusca, String valor, String colunaBotao) {
+		//procurar a coluna do registro
+		WebElement tabela = getDriver().findElement(By.xpath("//table[@id='tabelaSaldo']"));
+		int idColuna = obterIdColuna(colunaBusca, tabela);
+		
+		//procurar a linha do registro
+		int idLinha = obterIdLinha(valor, tabela, idColuna);
+		
+		//procurar a coluna do botão
+		int idColunaBotao = obterIdColuna(colunaBotao, tabela);
+		
+		//clicar no botão
+		WebElement celula = tabela.findElement(By.xpath(".//tr["+idLinha+"]/td["+idColunaBotao+"]"));
+		return celula.getText();
+		
+	}
 
-	public int obterIdLinha(String valor, WebElement tabela, int idColuna) {
+	protected int obterIdLinha(String valor, WebElement tabela, int idColuna) {
 		List<WebElement> linhas = tabela.findElements(By.xpath("./tbody/tr/td["+idColuna+"]"));
 		int idLinha = -1;
 		for (int i = 0; i < linhas.size(); ++i) {
@@ -153,7 +170,7 @@ public class BasePage {
 		return idLinha;
 	}
 
-	private int obterIdColuna(String coluna, WebElement tabela) {
+	protected int obterIdColuna(String coluna, WebElement tabela) {
 		List<WebElement> colunas = tabela.findElements(By.xpath(".//th"));
 		
 		int idColuna = -1;

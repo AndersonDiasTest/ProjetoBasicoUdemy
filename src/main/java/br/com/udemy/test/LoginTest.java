@@ -19,7 +19,7 @@ public class LoginTest extends BaseTest {
 	@Before
 	public void inicializa() {
 		getDriver();
-		getDriver().manage().window().maximize();
+//		getDriver().manage().window().maximize();
 		getDriver().get("https://seubarriga.wcaquino.me");
 		loginPage = new LoginPage();
 		homePage = new HomePage();
@@ -27,7 +27,7 @@ public class LoginTest extends BaseTest {
 	
 	@Test
 	public void login() {
-		loginPage.setUsuario("udemy@mail");
+		loginPage.setEmail("udemy@mail");
 		loginPage.setSenha("pass");
 		loginPage.submit();
 		Assert.assertEquals("Bem vindo, Anderson!", homePage.obterTextoSucessoLogin());

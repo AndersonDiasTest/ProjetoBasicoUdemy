@@ -11,14 +11,20 @@ public class ContasPage extends BasePage {
 	}
 
 	public void submit() {
-		clicaRadioCheckboxEBotao(By.xpath("//input[@id='nome']/../../../div[2]"));
+		clicaRadioCheckboxEBotao(By.xpath("//button[contains(text(),'Salvar')]"));
 	}
 	
-	public String obterTextoAlertaCadastroContaSucesso() {
+	public void clicaBotaoAlterarConta(String registro) {
+		obterCelula("Conta", registro, "Ações", "tabelaContas")
+			.findElement(By.xpath(".//span[@class='glyphicon glyphicon-edit']")).click();
+	}
+	
+	public void clicaBotaoRemoverConta(String registro) {
+		obterCelula("Conta", registro, "Ações", "tabelaContas")
+			.findElement(By.xpath(".//span[@class='glyphicon glyphicon-remove-circle']")).click();
+	}
+	
+	public String obterTextoMsgAlertas() {
 		return obterTexto(By.xpath("//body/div[@role='alert']"));
-	}
-	
-	public void teste() {
-		
 	}
 }
