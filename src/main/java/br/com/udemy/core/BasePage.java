@@ -37,7 +37,6 @@ public class BasePage {
 	
 	public void clicaBotao(String botao) {
 		getDriver().findElement(By.id(botao)).click();
-		
 	}
 	
 	public void clicaLink(String link) {
@@ -46,6 +45,10 @@ public class BasePage {
 
 	public String recuperaUrlAtual() {
 		return getDriver().getCurrentUrl();
+	}
+	
+	public void clicaBotaoPorTexto(String texto) {
+		clicaRadioCheckboxEBotao(By.xpath("//button[.='" + texto + "']"));
 	}
 	
 	/****************** busca valores ***********************/

@@ -2,8 +2,6 @@ package br.com.udemy.page;
 
 import static br.com.udemy.core.DriverFactory.getDriver;
 
-import org.openqa.selenium.By;
-
 import br.com.udemy.core.BasePage;
 
 public class LoginPage extends BasePage {
@@ -20,15 +18,15 @@ public class LoginPage extends BasePage {
 		preenche("senha", senha);
 	}
 	
-	public void submit() {
-		clicaRadioCheckboxEBotao(By.xpath("//button[.='Entrar']"));
+	public void entrar() {
+		clicaBotaoPorTexto("Entrar");
 	}
 	
 	public void logar (String email, String senha) {
 		acessarTelaInicial();
 		setEmail(email);
 		setSenha(senha);
-		submit();
+		entrar();
 	}
 
 }

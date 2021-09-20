@@ -9,40 +9,44 @@ import br.com.udemy.core.BasePage;
 
 public class MovimentacaoPage extends BasePage {
 
-	public void setTipoMovimentacao(String campo, String valor) {
-		selecionaOpcaoCombo(campo, valor);
+	public void setTipoMovimentacao(String valor) {
+		selecionaOpcaoCombo("tipo", valor);
 	}
 
-	public void setDataMovimentacao(String campo, String valor) {
-		preenche(campo, valor);		
+	public void setDataMovimentacao(String valor) {
+		preenche("data_transacao", valor);		
 	}
 	
-	public void setDataPagamento(String campo, String valor) {
-		preenche(campo, valor);		
+	public void setDataPagamento(String valor) {
+		preenche("data_pagamento", valor);		
 	}
 
-	public void setDescricao(String campo, String valor) {
-		preenche(campo, valor);	
+	public void setDescricao(String valor) {
+		preenche("descricao", valor);	
 	}
 	
-	public void setInteressado(String campo, String valor) {
-		preenche(campo, valor);	
+	public void setInteressado(String valor) {
+		preenche("interessado", valor);	
 	}
 	
-	public void setValor(String campo, String valor) {
-		preenche(campo, valor);	
+	public void setValor(String valor) {
+		preenche("valor", valor);	
 	}
 	
-	public void setConta(String campo, String valor) {
-		selecionaOpcaoCombo(campo, valor);
+	public void setConta(String valor) {
+		selecionaOpcaoCombo("conta", valor);
 	}
 	
-	public void setSituacao(String campo) {
-		clicaRadioCheckboxEBotao(campo);
+	public void setSituacaoPago() {
+		clicaRadioCheckboxEBotao("status_pago");
 	}
 	
-	public void submitCriarMovimentacao() {
-		clicaRadioCheckboxEBotao(By.xpath("//*[@id='status_pendente']/../../../../div/button"));
+	public void setSituacaoPendente() {
+		clicaRadioCheckboxEBotao("status_pendente");
+	}
+	
+	public void salvarMovimentacao() {
+		clicaBotaoPorTexto("Salvar");
 	}
 	
 	/****************** ações na tabela *********************/
@@ -65,6 +69,7 @@ public class MovimentacaoPage extends BasePage {
 	
 	/****************** recuperar valores *********************/
 	
+	//verificar necessidade de separar em alertas de sucesso e de negação
 	public String obterTextoMsgAlertas() {
 		return obterTexto(By.xpath("//body/div[@role='alert']"));
 	}

@@ -10,7 +10,6 @@ import br.com.udemy.core.BaseTest;
 import br.com.udemy.page.HomePage;
 import br.com.udemy.page.LoginPage;
 
-
 public class LoginTest extends BaseTest {
 
 	private LoginPage loginPage;
@@ -23,13 +22,14 @@ public class LoginTest extends BaseTest {
 		getDriver().get("https://seubarriga.wcaquino.me");
 		loginPage = new LoginPage();
 		homePage = new HomePage();
+		System.out.println("aqui");
 	}
 	
 	@Test
 	public void login() {
 		loginPage.setEmail("udemy@mail");
 		loginPage.setSenha("pass");
-		loginPage.submit();
+		loginPage.entrar();
 		Assert.assertEquals("Bem vindo, Anderson!", homePage.obterTextoSucessoLogin());
 	}
 }

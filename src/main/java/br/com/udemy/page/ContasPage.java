@@ -10,8 +10,8 @@ public class ContasPage extends BasePage {
 		preenche("nome", nomeConta);
 	}
 
-	public void submit() {
-		clicaRadioCheckboxEBotao(By.xpath("//button[contains(text(),'Salvar')]"));
+	public void salvar() {
+		clicaBotaoPorTexto("Salvar");
 	}
 	
 	public void clicaBotaoAlterarConta(String registro) {
