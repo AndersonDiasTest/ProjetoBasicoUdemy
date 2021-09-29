@@ -51,20 +51,17 @@ public class MovimentacaoPage extends BasePage {
 	
 	/****************** ações na tabela *********************/
 	
-	public void clicaBotaoTabelaMovimentacao(String colunaBusca, String valor, String colunaBotao) {
-		//procurar a coluna do registro
-		WebElement tabela = getDriver().findElement(By.xpath("//table[@id='tabelaExtrato']"));
-		int idColuna = obterIdColuna(colunaBusca, tabela);
-		
-		//procurar a linha do registro
-		int idLinha = obterIdLinha(valor, tabela, idColuna);
-		
-		//procurar a coluna do botão
-		int idColunaBotao = obterIdColuna(colunaBotao, tabela);
-		
-		//clicar no botão
-		WebElement celula = tabela.findElement(By.xpath(".//tr["+idLinha+"]/td["+idColunaBotao+"]"));
+	public void clicaBotaoRemoverMovimentacao(String valorBusca) {
+		WebElement celula = obterCelula("Descrição", valorBusca, "Ações", "tabelaExtrato");
 		celula.findElement(By.xpath(".//a[1]")).click();
+	}
+	
+	public boolean verificaSeHaMovimentacoes() {
+		WebElement tabela = getDriver().findElement(By.xpath("//table[@id='tabelaExtrato']"));
+		int idColuna = obterIdColuna("Descrição", tabela);
+		
+		boolean movimentacoes = verificarSeHaRegistros(tabela, idColuna);
+		return movimentacoes;
 	}
 	
 	/****************** recuperar valores *********************/

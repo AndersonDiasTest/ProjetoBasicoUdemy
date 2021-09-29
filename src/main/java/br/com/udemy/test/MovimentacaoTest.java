@@ -1,27 +1,32 @@
 package br.com.udemy.test;
 
+import java.util.Date;
+
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import br.com.udemy.core.BaseTest;
 import br.com.udemy.page.HomePage;
 import br.com.udemy.page.MovimentacaoPage;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MovimentacaoTest extends BaseTest {
 
 	private HomePage homePage = new HomePage();
 	private MovimentacaoPage movimentacaoPage = new MovimentacaoPage();
 
 	@Test
-	public void inserirMovimentacaoComSucesso() {
+	public void t1_inserirMovimentacaoComSucesso() {
 		homePage.clicaLink("Criar Movimentação");
 		movimentacaoPage.setTipoMovimentacao("Receita");
-		movimentacaoPage.setDataMovimentacao("17/09/2021");
-		movimentacaoPage.setDataPagamento("17/10/2021");
+		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
+		movimentacaoPage.setDataPagamento(formataData(new Date()));
 		movimentacaoPage.setDescricao("Texto descrição");
 		movimentacaoPage.setInteressado("Texto interessado");
 		movimentacaoPage.setValor("2000");
-		movimentacaoPage.setConta("teste");
+		movimentacaoPage.setConta("Primeira Conta alterada");
 		movimentacaoPage.setSituacaoPago();
 		movimentacaoPage.salvarMovimentacao();
 
@@ -31,7 +36,7 @@ public class MovimentacaoTest extends BaseTest {
 	// evoluir cenários negativos para testes parametrizaveis
 
 	@Test
-	public void dataMovimentacaoObrigatoria() {
+	public void t2_dataMovimentacaoObrigatoria() {
 		homePage.clicaLink("Criar Movimentação");
 		movimentacaoPage.setTipoMovimentacao("Receita");
 		movimentacaoPage.setDataPagamento("17/10/2021");
@@ -47,10 +52,10 @@ public class MovimentacaoTest extends BaseTest {
 	}
 
 	@Test
-	public void dataPagamentoObrigatoria() {
+	public void t3_dataPagamentoObrigatoria() {
 		homePage.clicaLink("Criar Movimentação");
 		movimentacaoPage.setTipoMovimentacao("Receita");
-		movimentacaoPage.setDataMovimentacao("17/09/2021");
+		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDescricao("Texto descrição");
 		movimentacaoPage.setInteressado("Texto interessado");
 		movimentacaoPage.setValor("2000");
@@ -63,10 +68,10 @@ public class MovimentacaoTest extends BaseTest {
 	}
 
 	@Test
-	public void descricaoObrigatoria() {
+	public void t4_descricaoObrigatoria() {
 		homePage.clicaLink("Criar Movimentação");
 		movimentacaoPage.setTipoMovimentacao("Receita");
-		movimentacaoPage.setDataMovimentacao("17/09/2021");
+		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
 		movimentacaoPage.setInteressado("Texto interessado");
 		movimentacaoPage.setValor("2000");
@@ -79,10 +84,10 @@ public class MovimentacaoTest extends BaseTest {
 	}
 
 	@Test
-	public void interessadoObrigatorio() {
+	public void t5_interessadoObrigatorio() {
 		homePage.clicaLink("Criar Movimentação");
 		movimentacaoPage.setTipoMovimentacao("Receita");
-		movimentacaoPage.setDataMovimentacao("17/09/2021");
+		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
 		movimentacaoPage.setDescricao("Texto descrição");
 		movimentacaoPage.setValor("2000");
@@ -95,10 +100,10 @@ public class MovimentacaoTest extends BaseTest {
 	}
 
 	@Test
-	public void valorObrigatorio() {
+	public void t6_valorObrigatorio() {
 		homePage.clicaLink("Criar Movimentação");
 		movimentacaoPage.setTipoMovimentacao("Receita");
-		movimentacaoPage.setDataMovimentacao("17/09/2021");
+		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
 		movimentacaoPage.setDescricao("Texto descrição");
 		movimentacaoPage.setInteressado("Texto interessado");
@@ -111,10 +116,10 @@ public class MovimentacaoTest extends BaseTest {
 	}
 
 	@Test
-	public void valorDeveSerNumero() {
+	public void t7_valorDeveSerNumero() {
 		homePage.clicaLink("Criar Movimentação");
 		movimentacaoPage.setTipoMovimentacao("Receita");
-		movimentacaoPage.setDataMovimentacao("17/09/2021");
+		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
 		movimentacaoPage.setDescricao("Texto descrição");
 		movimentacaoPage.setInteressado("Texto interessado");
@@ -128,10 +133,10 @@ public class MovimentacaoTest extends BaseTest {
 	}
 
 	@Test
-	public void inserirMovimentacaoFutura() {
+	public void t8_inserirMovimentacaoFutura() {
 		homePage.clicaLink("Criar Movimentação");
 		movimentacaoPage.setTipoMovimentacao("Receita");
-		movimentacaoPage.setDataMovimentacao(getDataFutura());
+		movimentacaoPage.setDataMovimentacao(formataData(getDataFutura()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
 		movimentacaoPage.setDescricao("Texto descrição");
 		movimentacaoPage.setInteressado("Texto interessado");
@@ -144,20 +149,4 @@ public class MovimentacaoTest extends BaseTest {
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
 
-	@Test
-	public void removerMovimentação() {
-		homePage.clicaLink("Resumo Mensal");
-		movimentacaoPage.clicaBotaoTabelaMovimentacao("Descrição", "Texto descrição", "Ações");
-		Assert.assertEquals("Movimentação removida com sucesso!",
-				movimentacaoPage.obterTextoMsgAlertas());
-	}
-	
-	
 }
-
-//Data da Movimentação é obrigatório
-//Data do pagamento é obrigatório
-//Descrição é obrigatório
-//Interessado é obrigatório
-//Valor é obrigatório
-//Valor deve ser um número

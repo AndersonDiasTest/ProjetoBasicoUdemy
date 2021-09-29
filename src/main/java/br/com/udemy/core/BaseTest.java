@@ -13,7 +13,6 @@ import java.util.GregorianCalendar;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.openqa.selenium.OutputType;
@@ -28,12 +27,6 @@ public class BaseTest {
 	@Rule
 	public TestName testName = new TestName();
 	
-	
-	@Before
-	public void inicializa() {
-		loginPage.logar("udemy@mail", "pass");
-	}
-	
 	@After
 	public void finaliza() throws IOException {
 		
@@ -46,13 +39,17 @@ public class BaseTest {
 		}
 	}
 	//refatorar para busca de data atual
-	public static String getDataFutura() {
+	public static Date getDataFutura() {
 		Date data = new Date();
 		GregorianCalendar gc = new GregorianCalendar();
 		gc.setTime(data);
 		gc.set(Calendar.DATE, gc.get(Calendar.DATE) + 1);
+		return gc.getTime();
+	}
+	
+	public static String formataData(Date data) {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		return dateFormat.format(gc.getTime());
+		return dateFormat.format(data);
 	}
 }
 
