@@ -9,14 +9,23 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
 
-	private static WebDriver browser;
+//	private static WebDriver browser;
+	private static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<WebDriver>(){
+		@Override
+		protected synchronized WebDriver initialValue() {
+			return initDriver();
+		}
+	};
 
 	private DriverFactory() {
 	}
-
+	
 	public static WebDriver getDriver() {
-		if (browser == null) {
+		return threadDriver.get();
+	}
 
+	public static WebDriver initDriver() {
+			WebDriver browser = null;
 			switch (Propriedades.browser) {
 			case CHROME:
 				WebDriverManager.chromedriver().setup();
@@ -36,14 +45,17 @@ public class DriverFactory {
 			default:
 				break;
 			}
-		}
 		return browser;
 	}
 
 	public static void killDriver() {
+		WebDriver browser = getDriver();
 		if (browser != null) {
 			browser.quit();
 			browser = null;
+		}
+		if(threadDriver != null) {
+			threadDriver.remove();
 		}
 	}
 

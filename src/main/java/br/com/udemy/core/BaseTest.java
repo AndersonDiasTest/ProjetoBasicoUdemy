@@ -13,6 +13,7 @@ import java.util.GregorianCalendar;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.openqa.selenium.OutputType;
@@ -26,6 +27,11 @@ public class BaseTest {
 	
 	@Rule
 	public TestName testName = new TestName();
+
+	@Before
+	public void inicializa() {
+		loginPage.logar("udemy@mail", "pass");
+	}
 	
 	@After
 	public void finaliza() throws IOException {
@@ -56,10 +62,10 @@ public class BaseTest {
 //1. Inserir Conta
 //2. Alterar Conta
 //3. Inserir Conta com o mesmo nome
-//4. Inserir Movimentação
-//5. Campos obrigatórios da movimentação
-//6. Movimentação Futura
-//7. Remover Movimentação
-//8. Remover Conta com Movimentação
+//4. Inserir Movimentaï¿½ï¿½o
+//5. Campos obrigatï¿½rios da movimentaï¿½ï¿½o
+//6. Movimentaï¿½ï¿½o Futura
+//7. Remover Movimentaï¿½ï¿½o
+//8. Remover Conta com Movimentaï¿½ï¿½o
 //9. Saldo das Contas*
 //10. Resumo Mensal

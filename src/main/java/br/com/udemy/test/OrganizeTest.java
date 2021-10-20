@@ -26,7 +26,7 @@ public class OrganizeTest extends BaseTest {
 	public void t1_removerContaEmUso() {
 		homePage.clicaMenuListarContas();
 		contaPage.clicaBotaoRemoverConta("Primeira Conta alterada");
-		Assert.assertEquals("Conta em uso na movimentações", 
+		Assert.assertEquals("Conta em uso na movimentaÃ§Ãµes", 
 				contaPage.obterTextoMsgAlertas());
 	}
 	
@@ -38,14 +38,14 @@ public class OrganizeTest extends BaseTest {
 	}
 	
 	@Test
-	public void t3_removerMovimentação() {
+	public void t3_removerMovimentacao() {
 		homePage.clicaLink("Resumo Mensal");
-		movimentacaoPage.clicaBotaoRemoverMovimentacao("Texto descrição");
-		Assert.assertEquals("Movimentação removida com sucesso!",
+		movimentacaoPage.clicaBotaoRemoverMovimentacao("Texto descriÃ§Ã£o");
+		Assert.assertEquals("MovimentaÃ§Ã£o removida com sucesso!",
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
 	
-	//Não pode haver registros na tela Resumo Mensal para os testes passarem
+	//Nï¿½o pode haver registros na tela Resumo Mensal para os testes passarem
 	@Test
 	public void t4_testResumoMensal() {
 		homePage.clicaLink("Resumo Mensal");
@@ -66,9 +66,9 @@ public class OrganizeTest extends BaseTest {
 	public void t5_semMovimentacoesParaRemover() {
 		homePage.clicaLink("Resumo Mensal");
 		if (movimentacaoPage.verificaSeHaMovimentacoes()) {
-			System.out.println("Há movimentações");
+			System.out.println("HÃ¡ movimentaÃ§Ãµes");
 		} else {
-			System.out.println("Não há movimentações");
+			System.out.println("NÃ£o hÃ¡ movimentaÃ§Ãµes");
 		}
 		
 		Assert.assertFalse(movimentacaoPage.verificaSeHaMovimentacoes());
