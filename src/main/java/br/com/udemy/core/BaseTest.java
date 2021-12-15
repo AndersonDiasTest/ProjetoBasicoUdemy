@@ -19,32 +19,37 @@ import org.junit.rules.TestName;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import br.com.udemy.page.HomePage;
 import br.com.udemy.page.LoginPage;
 
 public class BaseTest {
 
 	public LoginPage loginPage = new LoginPage();
-	
+	HomePage homePage = new HomePage();
+
 	@Rule
 	public TestName testName = new TestName();
 
 	@Before
 	public void inicializa() {
 		loginPage.logar("udemy@mail", "pass");
+//		HomePage homePage = new HomePage();
+//		homePage.clicaReset();
 	}
-	
+
 	@After
 	public void finaliza() throws IOException {
-		
+
 		TakesScreenshot print = (TakesScreenshot) getDriver();
 		File arquivo = print.getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(arquivo, new File("target/screenshot/" + testName.getMethodName() + ".jpg"));
-		
+
 		if (Propriedades.FECHAR_BROWSER) {
 			killDriver();
 		}
 	}
-	//refatorar para busca de data atual
+
+	// refatorar para busca de data atual
 	public static Date getDataFutura() {
 		Date data = new Date();
 		GregorianCalendar gc = new GregorianCalendar();
@@ -52,7 +57,7 @@ public class BaseTest {
 		gc.set(Calendar.DATE, gc.get(Calendar.DATE) + 1);
 		return gc.getTime();
 	}
-	
+
 	public static String formataData(Date data) {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		return dateFormat.format(data);

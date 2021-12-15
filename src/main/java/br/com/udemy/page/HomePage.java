@@ -25,4 +25,12 @@ public class HomePage extends BasePage {
 		WebElement celula = obterCelula("Conta", valor, "Saldo", "tabelaSaldo");
 		return celula.getText();
 	}
+	
+	public void clicaReset() {
+		clicaLink("reset");
+	}
+	
+	public void logoff() {
+		clicaLink("Sair");
+	}
 }

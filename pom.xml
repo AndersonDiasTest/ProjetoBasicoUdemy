@@ -23,7 +23,7 @@
 						<include>br/com/udemy/suites/*.java</include>
 					</includes>
 					<parallel>all</parallel>
-					<threadCount>2</threadCount>
+					<threadCount>1</threadCount>
 				</configuration>
 			</plugin>
 		</plugins>

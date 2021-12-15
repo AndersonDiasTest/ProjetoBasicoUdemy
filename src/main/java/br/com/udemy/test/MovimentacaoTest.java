@@ -19,133 +19,133 @@ public class MovimentacaoTest extends BaseTest {
 
 	@Test
 	public void t1_inserirMovimentacaoComSucesso() {
-		homePage.clicaLink("Criar Movimentação");
+		homePage.clicaLink("Criar MovimentaÃ§Ã£o");
 		movimentacaoPage.setTipoMovimentacao("Receita");
 		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDataPagamento(formataData(new Date()));
-		movimentacaoPage.setDescricao("Texto descrição");
+		movimentacaoPage.setDescricao("Texto descriÃ§Ã£o");
 		movimentacaoPage.setInteressado("Texto interessado");
 		movimentacaoPage.setValor("2000");
-		movimentacaoPage.setConta("Primeira Conta alterada");
+		movimentacaoPage.setConta("Conta para movimentacoes");
 		movimentacaoPage.setSituacaoPago();
 		movimentacaoPage.salvarMovimentacao();
 
-		Assert.assertEquals("Movimentação adicionada com sucesso!", 
+		Assert.assertEquals("MovimentaÃ§Ã£o adicionada com sucesso!", 
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
-	// evoluir cenários negativos para testes parametrizaveis
+	// evoluir cenarios negativos para testes parametrizaveis
 
 	@Test
 	public void t2_dataMovimentacaoObrigatoria() {
-		homePage.clicaLink("Criar Movimentação");
+		homePage.clicaLink("Criar MovimentaÃ§Ã£o");
 		movimentacaoPage.setTipoMovimentacao("Receita");
 		movimentacaoPage.setDataPagamento("17/10/2021");
-		movimentacaoPage.setDescricao("Texto descrição");
+		movimentacaoPage.setDescricao("Texto descriÃ§Ã£o");
 		movimentacaoPage.setInteressado("Texto interessado");
 		movimentacaoPage.setValor("2000");
-		movimentacaoPage.setConta("Primeira Conta alterada");
+		movimentacaoPage.setConta("Conta para movimentacoes");
 		movimentacaoPage.setSituacaoPago();
 		movimentacaoPage.salvarMovimentacao();
 
-		Assert.assertEquals("Data da Movimentação é obrigatório", 
+		Assert.assertEquals("Data da MovimentaÃ§Ã£o Ã© obrigatÃ³rio", 
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
 
 	@Test
 	public void t3_dataPagamentoObrigatoria() {
-		homePage.clicaLink("Criar Movimentação");
+		homePage.clicaLink("Criar MovimentaÃ§Ã£o");
 		movimentacaoPage.setTipoMovimentacao("Receita");
 		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
-		movimentacaoPage.setDescricao("Texto descrição");
+		movimentacaoPage.setDescricao("Texto descriÃ§Ã£o");
 		movimentacaoPage.setInteressado("Texto interessado");
 		movimentacaoPage.setValor("2000");
-		movimentacaoPage.setConta("Primeira Conta alterada");
+		movimentacaoPage.setConta("Conta para movimentacoes");
 		movimentacaoPage.setSituacaoPago();
 		movimentacaoPage.salvarMovimentacao();
 
-		Assert.assertEquals("Data do pagamento é obrigatório", 
+		Assert.assertEquals("Data do pagamento Ã© obrigatÃ³rio", 
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
 
 	@Test
 	public void t4_descricaoObrigatoria() {
-		homePage.clicaLink("Criar Movimentação");
+		homePage.clicaLink("Criar MovimentaÃ§Ã£o");
 		movimentacaoPage.setTipoMovimentacao("Receita");
 		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
 		movimentacaoPage.setInteressado("Texto interessado");
 		movimentacaoPage.setValor("2000");
-		movimentacaoPage.setConta("Primeira Conta alterada");
+		movimentacaoPage.setConta("Conta para movimentacoes");
 		movimentacaoPage.setSituacaoPago();
 		movimentacaoPage.salvarMovimentacao();
 
-		Assert.assertEquals("Descrição é obrigatório", 
+		Assert.assertEquals("DescriÃ§Ã£o Ã© obrigatÃ³rio", 
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
 
 	@Test
 	public void t5_interessadoObrigatorio() {
-		homePage.clicaLink("Criar Movimentação");
+		homePage.clicaLink("Criar MovimentaÃ§Ã£o");
 		movimentacaoPage.setTipoMovimentacao("Receita");
 		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
-		movimentacaoPage.setDescricao("Texto descrição");
+		movimentacaoPage.setDescricao("Texto descriÃ§Ã£o");
 		movimentacaoPage.setValor("2000");
-		movimentacaoPage.setConta("Primeira Conta alterada");
+		movimentacaoPage.setConta("Conta para movimentacoes");
 		movimentacaoPage.setSituacaoPago();
 		movimentacaoPage.salvarMovimentacao();
 
-		Assert.assertEquals("Interessado é obrigatório", 
+		Assert.assertEquals("Interessado Ã© obrigatÃ³rio", 
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
 
 	@Test
 	public void t6_valorObrigatorio() {
-		homePage.clicaLink("Criar Movimentação");
+		homePage.clicaLink("Criar MovimentaÃ§Ã£o");
 		movimentacaoPage.setTipoMovimentacao("Receita");
 		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
-		movimentacaoPage.setDescricao("Texto descrição");
+		movimentacaoPage.setDescricao("Texto descriÃ§Ã£o");
 		movimentacaoPage.setInteressado("Texto interessado");
-		movimentacaoPage.setConta("Primeira Conta alterada");
+		movimentacaoPage.setConta("Conta para movimentacoes");
 		movimentacaoPage.setSituacaoPago();
 		movimentacaoPage.salvarMovimentacao();
 
-		Assert.assertEquals("Valor é obrigatório\nValor deve ser um número", 
+		Assert.assertEquals("Valor Ã© obrigatÃ³rio\nValor deve ser um nÃºmero", 
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
 
 	@Test
 	public void t7_valorDeveSerNumero() {
-		homePage.clicaLink("Criar Movimentação");
+		homePage.clicaLink("Criar MovimentaÃ§Ã£o");
 		movimentacaoPage.setTipoMovimentacao("Receita");
 		movimentacaoPage.setDataMovimentacao(formataData(new Date()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
-		movimentacaoPage.setDescricao("Texto descrição");
+		movimentacaoPage.setDescricao("Texto descriÃ§Ã£o");
 		movimentacaoPage.setInteressado("Texto interessado");
 		movimentacaoPage.setValor("valor com texto");
-		movimentacaoPage.setConta("Primeira Conta alterada");
+		movimentacaoPage.setConta("Conta para movimentacoes");
 		movimentacaoPage.setSituacaoPago();
 		movimentacaoPage.salvarMovimentacao();
 
-		Assert.assertEquals("Valor deve ser um número", 
+		Assert.assertEquals("Valor deve ser um nÃºmero", 
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
 
 	@Test
 	public void t8_inserirMovimentacaoFutura() {
-		homePage.clicaLink("Criar Movimentação");
+		homePage.clicaLink("Criar MovimentaÃ§Ã£o");
 		movimentacaoPage.setTipoMovimentacao("Receita");
 		movimentacaoPage.setDataMovimentacao(formataData(getDataFutura()));
 		movimentacaoPage.setDataPagamento("17/10/2021");
-		movimentacaoPage.setDescricao("Texto descrição");
+		movimentacaoPage.setDescricao("Texto descriÃ§Ã£o");
 		movimentacaoPage.setInteressado("Texto interessado");
 		movimentacaoPage.setValor("2000");
-		movimentacaoPage.setConta("Primeira Conta alterada");
+		movimentacaoPage.setConta("Conta para movimentacoes");
 		movimentacaoPage.setSituacaoPago();
 		movimentacaoPage.salvarMovimentacao();
 
-		Assert.assertEquals("Data da Movimentação deve ser menor ou igual à data atual",
+		Assert.assertEquals("Data da MovimentaÃ§Ã£o deve ser menor ou igual Ã  data atual",
 				movimentacaoPage.obterTextoMsgAlertas());
 	}
 

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class BasePage {
 
-/****************** ações no formulário *********************/
+/****************** aï¿½ï¿½es no formulario *********************/
 	
 	public void preenche(String campo, String texto) {
 		getDriver().findElement(By.id(campo)).clear();
@@ -22,21 +22,25 @@ public class BasePage {
 		getDriver().findElement(by).click();		
 	}
 	
-	public void clicaRadioCheckboxEBotao(String campo) {
-		clicaRadioCheckboxEBotao(By.id(campo));		
+	public void clicaRadioCheckboxEBotao(String idCampo) {
+		clicaRadioCheckboxEBotao(By.id(idCampo));
 	}
 
-	public void selecionaOpcaoCombo(String campo, String valorVisivel) {
-		WebElement elemento =  getDriver().findElement(By.id(campo));
+	public void selecionaOpcaoCombo(String idCampo, String valorVisivel) {
+		WebElement elemento =  getDriver().findElement(By.id(idCampo));
 		Select combo = new Select(elemento);
 		combo.selectByVisibleText(valorVisivel);
-		//combo.selectByValue("superior"); (necessário refatorar metodo)
-		//combo.selectByIndex(7); (necessário refatorar metodo)
+		//combo.selectByValue("superior"); (necessï¿½rio refatorar metodo)
+		//combo.selectByIndex(7); (necessï¿½rio refatorar metodo)
 		//combo.deselectByVisibleText("O que eh esporte?");
 	}
 	
-	public void clicaBotao(String botao) {
-		getDriver().findElement(By.id(botao)).click();
+	public void clicaBotao(String idBotao) {
+		clicaBotao(By.id(idBotao));
+	}
+	
+	public void clicaBotao(By by) {
+		getDriver().findElement(by).click();
 	}
 	
 	public void clicaLink(String link) {
@@ -93,7 +97,7 @@ public class BasePage {
 		return obterTexto(By.id(campo));
 	}
 
-	/****************** ações de alerta *********************/
+	/****************** aï¿½ï¿½es de alerta *********************/
 	
 	public void passarParaAlerta() {
 		Alert alerta = getDriver().switchTo().alert();
@@ -108,7 +112,7 @@ public class BasePage {
 	//tem funcionado para todos os alertas
 
 	
-	/****************** ações na tabela *********************/
+	/****************** aï¿½ï¿½es na tabela *********************/
 	
 	public WebElement obterCelula(String colunaBusca, String valorBusca, String colunaCelula, String idTabela) {
 		//procurar a coluna do registro
@@ -118,7 +122,7 @@ public class BasePage {
 		//procurar a linha do registro
 		int idLinha = obterIdLinha(valorBusca, tabela, idColuna);
 		
-		//procurar a coluna do botão
+		//procurar a coluna do botï¿½o
 		int idColunaBotao = obterIdColuna(colunaCelula, tabela);
 		
 		//retornar celula

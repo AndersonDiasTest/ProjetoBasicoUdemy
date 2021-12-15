@@ -16,12 +16,12 @@ public class ContasPage extends BasePage {
 	}
 	
 	public void clicaBotaoAlterarConta(String registro) {
-		obterCelula("Conta", registro, "Ações", "tabelaContas")
+		obterCelula("Conta", registro, "AÃ§Ãµes", "tabelaContas")
 			.findElement(By.xpath(".//span[@class='glyphicon glyphicon-edit']")).click();
 	}
 	
 	public void clicaBotaoRemoverConta(String registro) {
-		obterCelula("Conta", registro, "Ações", "tabelaContas")
+		obterCelula("Conta", registro, "AÃ§Ãµes", "tabelaContas")
 			.findElement(By.xpath(".//span[@class='glyphicon glyphicon-remove-circle']")).click();
 	}
 	

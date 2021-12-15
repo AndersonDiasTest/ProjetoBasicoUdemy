@@ -49,16 +49,16 @@ public class MovimentacaoPage extends BasePage {
 		clicaBotaoPorTexto("Salvar");
 	}
 	
-	/****************** ações na tabela *********************/
+	/****************** aÃ§Ãµes na tabela *********************/
 	
 	public void clicaBotaoRemoverMovimentacao(String valorBusca) {
-		WebElement celula = obterCelula("Descrição", valorBusca, "Ações", "tabelaExtrato");
+		WebElement celula = obterCelula("DescriÃ§Ã£o", valorBusca, "AÃ§Ãµes", "tabelaExtrato");
 		celula.findElement(By.xpath(".//a[1]")).click();
 	}
 	
 	public boolean verificaSeHaMovimentacoes() {
 		WebElement tabela = getDriver().findElement(By.xpath("//table[@id='tabelaExtrato']"));
-		int idColuna = obterIdColuna("Descrição", tabela);
+		int idColuna = obterIdColuna("DescriÃ§Ã£o", tabela);
 		
 		boolean movimentacoes = verificarSeHaRegistros(tabela, idColuna);
 		return movimentacoes;
@@ -66,7 +66,7 @@ public class MovimentacaoPage extends BasePage {
 	
 	/****************** recuperar valores *********************/
 	
-	//verificar necessidade de separar em alertas de sucesso e de negação
+	//verificar necessidade de separar em alertas de sucesso e de negaï¿½ï¿½o
 	public String obterTextoMsgAlertas() {
 		return obterTexto(By.xpath("//body/div[@role='alert']"));
 	}
